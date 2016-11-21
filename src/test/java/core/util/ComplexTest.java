@@ -5,7 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
  * Unit tests for the representation of high precision complex numbers
