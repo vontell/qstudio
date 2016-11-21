@@ -1,13 +1,16 @@
-package util.math;
+package core.util;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
- * An immutable, high precision representation of a complex number
+ * An immutable, high precision representation of a complex number (up to 128 bits)
  * @author Aaron Vontell
  * @version 0.1
  */
 public class Complex {
+
+    public static final MathContext PRECISION = MathContext.DECIMAL128;
 
     /**
      * The high-precision value of the real part of this complex number
@@ -44,15 +47,45 @@ public class Complex {
     }
 
     /**
+     * Returns the real part of this complex number, as a BigDecimal
+     * @return the real part of this complex number
+     */
+    public BigDecimal getRealPart() {
+        return realPart;
+    }
+
+    /**
+     * Returns the imaginary part of this complex number, as a BigDecimal
+     * @return the imaginary part of this complex number
+     */
+    public BigDecimal getImaginaryPart() {
+        return imaginaryPart;
+    }
+
+    /**
      * Returns the magnitude of this complex number
+     * TODO: Make this more precise using BigDecimal all the way through?
      * @return the magnitude of this complex number
      */
-    public BigDecimal magnitude() {
+    public BigDecimal getMagnitude() {
 
         BigDecimal realSquared = realPart.pow(2);
         BigDecimal imaginarySquared = imaginaryPart.pow(2);
         BigDecimal addedSquares = realSquared.add(imaginarySquared);
-        BigDecimal squareRoot = addedSquares.
+        BigDecimal squareRoot = new BigDecimal(Math.sqrt(addedSquares.doubleValue()));
+        return squareRoot;
+
+    }
+
+    /**
+     * Returns the normalized version of this complex number
+     * @return the normalized complex number
+     */
+    public Complex getNormalized() {
+
+        BigDecimal realNormalized = realPart.divide(getMagnitude(), PRECISION);
+        BigDecimal imaginaryNormalized = imaginaryPart.divide(getMagnitude(), PRECISION);
+        return new Complex(realNormalized, imaginaryNormalized);
 
     }
 
