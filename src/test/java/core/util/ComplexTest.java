@@ -24,7 +24,7 @@ public class ComplexTest {
      * Tests the creation and methods of a simple complex number
      */
     @Test
-    public void simpleComplexNumberBig() {
+    public void testSimpleComplexNumberBig() {
 
         BigDecimal realPart = new BigDecimal(1.0);
         BigDecimal imaginaryPart = new BigDecimal(1.0);
