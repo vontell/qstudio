@@ -1,2 +1,4 @@
 .idea/
 qstudio.iml
+.gradle/*
+build/*

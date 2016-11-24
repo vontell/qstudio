@@ -35,7 +35,7 @@ public class Complex {
     }
 
     /**
-     * Creates a complex number from the given real and imaginary parts (float
+     * Creates a complex number from the given real and imaginary parts (float)
      * @param realPart The real part of the complex number
      * @param imaginaryPart The imaginary part of this complex number
      */
@@ -74,6 +74,12 @@ public class Complex {
         BigDecimal addedSquares = realSquared.add(imaginarySquared);
         BigDecimal squareRoot = new BigDecimal(Math.sqrt(addedSquares.doubleValue()));
         return squareRoot;
+
+    }
+
+    public BigDecimal getPhase() {
+
+        throw new RuntimeException("Not yet implemented!");
 
     }
 
