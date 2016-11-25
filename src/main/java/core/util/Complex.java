@@ -1,26 +1,29 @@
 package core.util;
 
+import org.apfloat.Apcomplex;
+import org.apfloat.ApcomplexMath;
+import org.apfloat.Apfloat;
+import org.apfloat.ApfloatMath;
+
 import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
- * An immutable, high precision representation of a complex number (up to 128 bits)
+ * An immutable, high precision representation of a complex number
+ * This is a portal into the Apcomplex class
  * @author Aaron Vontell
- * @version 0.1
+ * @version 0.2
  */
 public class Complex {
 
-    public static final MathContext PRECISION = MathContext.DECIMAL128;
+    /**
+     * The high-precision complex value
+     */
+    private final Apcomplex complexValue;
 
     /**
-     * The high-precision value of the real part of this complex number
+     * The max precision to use when there is an infinite expansion
      */
-    private final BigDecimal realPart;
-
-    /**
-     * The high-precision value of the imaginary part of this complex number
-     */
-    private final BigDecimal imaginaryPart;
+    public static final int MAX_PRECISION = 100;
 
     /**
      * Creates a complex number from the given real and imaginary parts (BigDecimal)
@@ -29,8 +32,9 @@ public class Complex {
      */
     public Complex(BigDecimal realPart, BigDecimal imaginaryPart) {
 
-        this.realPart = realPart;
-        this.imaginaryPart = imaginaryPart;
+        Apfloat realFloat = new Apfloat(realPart, MAX_PRECISION);
+        Apfloat imagFloat = new Apfloat(imaginaryPart, MAX_PRECISION);
+        this.complexValue = new Apcomplex(realFloat, imagFloat);
 
     }
 
@@ -41,45 +45,60 @@ public class Complex {
      */
     public Complex(float realPart, float imaginaryPart) {
 
-        this.realPart = new BigDecimal(realPart);
-        this.imaginaryPart = new BigDecimal(imaginaryPart);
+        Apfloat realFloat = new Apfloat(realPart, MAX_PRECISION);
+        Apfloat imagFloat = new Apfloat(imaginaryPart, MAX_PRECISION);
+        this.complexValue = new Apcomplex(realFloat, imagFloat);
 
     }
 
     /**
-     * Returns the real part of this complex number, as a BigDecimal
+     * Creates a complex number from the given real and imaginary parts (Apfloat)
+     * @param realPart The real part of the complex number
+     * @param imaginaryPart The imaginary part of this complex number
+     */
+    public Complex(Apfloat realPart, Apfloat imaginaryPart) {
+
+        realPart.precision(MAX_PRECISION);
+        realPart.precision(MAX_PRECISION);
+        this.complexValue = new Apcomplex(realPart, imaginaryPart);
+
+    }
+
+    /**
+     * Returns the real part of this complex number, as a high precision float
      * @return the real part of this complex number
      */
-    public BigDecimal getRealPart() {
-        return realPart;
+    public Apfloat getRealPart() {
+        return this.complexValue.real();
     }
 
     /**
-     * Returns the imaginary part of this complex number, as a BigDecimal
+     * Returns the imaginary part of this complex number, as a high precision float
      * @return the imaginary part of this complex number
      */
-    public BigDecimal getImaginaryPart() {
-        return imaginaryPart;
+    public Apfloat getImaginaryPart() {
+        return this.complexValue.imag();
     }
 
     /**
      * Returns the magnitude of this complex number
-     * TODO: Make this more precise using BigDecimal all the way through?
      * @return the magnitude of this complex number
      */
-    public BigDecimal getMagnitude() {
+    public Apfloat getMagnitude() {
 
-        BigDecimal realSquared = realPart.pow(2);
-        BigDecimal imaginarySquared = imaginaryPart.pow(2);
-        BigDecimal addedSquares = realSquared.add(imaginarySquared);
-        BigDecimal squareRoot = new BigDecimal(Math.sqrt(addedSquares.doubleValue()));
-        return squareRoot;
+        return ApfloatMath.sqrt(ApfloatMath.pow(getRealPart(), 2)
+                .add(ApfloatMath.pow(getImaginaryPart(), 2))) ;
 
     }
 
-    public BigDecimal getPhase() {
+    /**
+     * Returns the phase of this complex number, or the
+     * angle of the vector in the complex plane
+     * @return the phase of this complex number
+     */
+    public Apfloat getPhase() {
 
-        throw new RuntimeException("Not yet implemented!");
+        return ApcomplexMath.arg(this.complexValue);
 
     }
 
@@ -89,9 +108,8 @@ public class Complex {
      */
     public Complex getNormalized() {
 
-        BigDecimal realNormalized = realPart.divide(getMagnitude(), PRECISION);
-        BigDecimal imaginaryNormalized = imaginaryPart.divide(getMagnitude(), PRECISION);
-        return new Complex(realNormalized, imaginaryNormalized);
+        Apcomplex normalized = complexValue.divide(getMagnitude());
+        return new Complex(normalized.real(), normalized.imag());
 
     }
 
@@ -102,8 +120,7 @@ public class Complex {
      */
     public String toString() {
 
-        return String.format("%s + i * %s", realPart.toString(),
-                imaginaryPart.toString());
+        return complexValue.toString();
 
     }
 

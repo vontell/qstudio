@@ -1,5 +1,6 @@
 package core.util;
 
+import org.apfloat.Apfloat;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -33,13 +34,10 @@ public class MathematicsTest {
     @Test
     public void testContinuedFractionIrrational() {
 
-        float pi = (float) Math.PI;
-        int[] desired = {3, 7, 15, 1};
+        Apfloat PI = Mathematics.PI;
+        int[] desired = {3, 7, 15, 1, 292, 1, 1, 1, 2, 1};
 
-        int[] floatResult = Mathematics.continuedFraction(pi, 4);
-
-        printArray(desired);
-        printArray(floatResult);
+        int[] floatResult = Mathematics.continuedFraction(PI, 10);
 
         assertEquals("Expected correct array sizes", desired.length, floatResult.length);
         assertTrue("Expected correct representation", intArraysAreEqual(floatResult, desired));
