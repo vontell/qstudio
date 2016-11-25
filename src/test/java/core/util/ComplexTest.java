@@ -40,6 +40,8 @@ public class ComplexTest {
         assertEquals("Expected string representation", "(1, 1)", complexNumber.toString());
         assertEquals("Magnitude should be sqrt(2)", PRECISE_SQRT_2, complexNumber.getMagnitude());
         assertEquals("Phase should be pi / 4", PRECISE_PI_OVER_FOUR.floatValue(), complexNumber.getPhase().floatValue(), EPSILON.floatValue());
+        assertEquals("Expected complex conjugate", new Apfloat(-1), complexNumber.getConjugate().getImaginaryPart());
+        assertEquals("Expected complex conjugate", new Apfloat(1), complexNumber.getConjugate().getRealPart());
 
         // Test normalization
         Complex normalized = complexNumber.getNormalized();
@@ -64,6 +66,8 @@ public class ComplexTest {
         assertEquals("Expected string representation", "0", complexNumber.toString());
         assertEquals("Magnitude should be 0", PRECISE_ZERO, complexNumber.getMagnitude());
         assertEquals("Phase should be null", null, complexNumber.getPhase());
+        assertEquals("Expected complex conjugate", PRECISE_ZERO, complexNumber.getConjugate().getImaginaryPart());
+        assertEquals("Expected complex conjugate", PRECISE_ZERO, complexNumber.getConjugate().getRealPart());
         assertFalse("Should not be normalized", complexNumber.isNormalized(Complex.EPSILON));
 
     }

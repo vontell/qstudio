@@ -130,6 +130,14 @@ public class Complex {
     }
 
     /**
+     * Returns the complex conjugate of this complex number
+     * @return the complex conjugate
+     */
+    public Complex getConjugate() {
+        return new Complex(complexValue.real(), complexValue.conj().imag());
+    }
+
+    /**
      * Returns true if this complex number is normalized, or has
      * a magnitude of 1, up to a tolerance of epsilon
      * @param epsilon The amount of error allowable
