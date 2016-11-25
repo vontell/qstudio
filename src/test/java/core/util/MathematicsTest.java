@@ -63,6 +63,55 @@ public class MathematicsTest {
     }
 
     /**
+     * Computes the GCD when b is already zero
+     */
+    @Test
+    public void testGCDBisZero() {
+
+        int result = Mathematics.greatestCommonDenominator(312, 0);
+
+        assertEquals("Expected GCD of a", 312, result);
+
+    }
+
+    /**
+     * Computes the GCD when b is greater than a
+     */
+    @Test
+    public void testGCDAisGreater() {
+
+        int result = Mathematics.greatestCommonDenominator(32, 456);
+
+        assertEquals("Expected correct GCD", 8, result);
+
+    }
+
+    /**
+     * Computes the GCD when a and b are equal
+     */
+    @Test
+    public void testGCDAisB() {
+
+        int result = Mathematics.greatestCommonDenominator(32, 32);
+
+        assertEquals("Expected GCD of a or b", 32, result);
+
+    }
+
+    /**
+     * Computers the GCD when the GCD of a and b is 1
+     * i.e. a and b are prime numbers
+     */
+    @Test
+    public void testGCDisOne() {
+
+        int result = Mathematics.greatestCommonDenominator(13, 27);
+
+        assertEquals("Expected GCD of a", 1, result);
+
+    }
+
+    /**
      * Determines if two integer arrays are equal
      * @param arr1 The first array
      * @param arr2 The second array

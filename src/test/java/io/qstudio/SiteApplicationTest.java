@@ -16,4 +16,9 @@ public class SiteApplicationTest {
     public void contextLoads() {
     }
 
+    @Test
+    public void mainTest() {
+        SiteApplication.main(new String[] {});
+    }
+
 }

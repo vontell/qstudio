@@ -1,6 +1,5 @@
 package core.util;
 
-import org.apfloat.Apcomplex;
 import org.apfloat.Apfloat;
 
 import java.math.BigDecimal;
@@ -107,6 +106,29 @@ public class Mathematics {
     public static int[] continuedFraction(BigDecimal number, int iterations) {
 
         return continuedFraction(new Apfloat(number), iterations);
+
+    }
+
+    /**
+     * Computes the greatest common denominator of two positive integers a and b, using
+     * Euclid's algorithm in an iterative approach
+     * More information at https://en.wikipedia.org/wiki/Greatest_common_divisor#Using_Euclid.27s_algorithm
+     * @param a The first number to compute the GCD with
+     * @param b The second number to compute the GCD with
+     * @return The greatest common denominator of a and b
+     */
+    public static int greatestCommonDenominator(int a, int b) {
+
+        while(b != 0) {
+
+            int bTemp = b;
+
+            b = a % b;
+            a = bTemp;
+
+        }
+
+        return a;
 
     }
 
