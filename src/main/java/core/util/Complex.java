@@ -23,7 +23,7 @@ public class Complex {
     /**
      * The max precision to use when there is an infinite expansion
      */
-    public static final int MAX_PRECISION = 100;
+    public static final int MAX_PRECISION = 20;
 
     /**
      * A default value of epsilon for error tolerance
@@ -138,6 +138,21 @@ public class Complex {
     }
 
     /**
+     * Rotate this complex number in the complex plane by the given
+     * amount in radians
+     * @param radians The angle to rotate this vector by counterclockwise
+     * @return The new complex number, rotated by radians
+     */
+    public Complex rotate(Apfloat radians) {
+
+        Apcomplex rotation = new Apcomplex(ApfloatMath.cos(radians),
+                ApfloatMath.sin(radians));
+        Apcomplex rotated = complexValue.multiply(rotation);
+        return new Complex(rotated.real(), rotated.imag());
+
+    }
+
+    /**
      * Returns true if this complex number is normalized, or has
      * a magnitude of 1, up to a tolerance of epsilon
      * @param epsilon The amount of error allowable
@@ -156,6 +171,34 @@ public class Complex {
 
         return complexValue.toString();
 
+    }
+
+    /**
+     * A custom equals function that returns equal if
+     * the given complex number has the same real and
+     * imaginary components as this complex number
+     * @return if these two complex numbers are equivalent
+     */
+    public boolean valueEquals(Complex other) {
+        return getRealPart().equals(other.getRealPart()) &&
+                getImaginaryPart().equals(other.getImaginaryPart());
+    }
+
+    /**
+     * A custom equals function that returns equal if
+     * the given complex number has the same real and
+     * imaginary components as this complex number, up to
+     * an error tolerance epsilon
+     * @return if these two complex numbers are equivalent, up to
+     *         the given epsilon
+     */
+    public boolean valueEquals(Complex other, Apfloat epsilon) {
+
+        Apfloat realDiff = ApfloatMath.abs(getRealPart().subtract(other.getRealPart()));
+        Apfloat imagDiff = ApfloatMath.abs(getImaginaryPart().subtract(other.getImaginaryPart()));
+
+        return realDiff.compareTo(epsilon) == -1 &&
+                imagDiff.compareTo(epsilon) == -1;
     }
 
 

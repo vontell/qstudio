@@ -21,6 +21,7 @@ public class ComplexTest {
     private static final Apfloat PRECISE_ONE = Apfloat.ONE;
     private static final Apfloat PRECISE_ZERO = Apcomplex.ZERO;
     private static final Apfloat PRECISE_PI_OVER_FOUR = Mathematics.PI.divide(new Apfloat(4));
+    private static final Apfloat PRECISE_PI_OVER_TWO = Mathematics.PI.divide(new Apfloat(2));
     private static final Apfloat PRECISE_SQRT_2 = ApfloatMath.sqrt(new Apfloat(2, Complex.MAX_PRECISION));
     private static final Apfloat PRECISE_ONE_OVER_SQRT_2 = PRECISE_ONE.divide(PRECISE_SQRT_2);
 
@@ -94,6 +95,18 @@ public class ComplexTest {
     @Test
     public void testDifferentAngles() {
 
+        Complex posOne = new Complex(1, 0);
+        Complex posI = new Complex(0, 1);
+        Complex negOne = new Complex(-1, 0);
+        Complex negI = new Complex(0, -1);
+
+        Apfloat radians = PRECISE_PI_OVER_TWO;
+
+        assertTrue("Expected rotation by pi/2 to i", posI.valueEquals(posOne.rotate(radians), Complex.EPSILON));
+        assertTrue("Expected rotation by pi/2 to -1", negOne.valueEquals(posI.rotate(radians), Complex.EPSILON));
+        assertTrue("Expected rotation by pi/2 to -i", negI.valueEquals(negOne.rotate(radians), Complex.EPSILON));
+        assertTrue("Expected rotation by pi/2 to 1", posOne.valueEquals(negI.rotate(radians), Complex.EPSILON));
+
     }
 
     /**
@@ -102,6 +115,39 @@ public class ComplexTest {
      */
     @Test
     public void testRotationAccuracy() {
+
+        Complex vector = new Complex(1, 0);
+        Complex desired = new Complex(1, 0);
+        Apfloat radians = PRECISE_PI_OVER_TWO;
+
+        for(int i = 0; i < 16; i++) {
+            vector = vector.rotate(radians);
+        }
+
+        assertTrue("Expected approximately equal", vector.valueEquals(desired, Complex.EPSILON));
+
+    }
+
+    /**
+     * Tests the equality of two complex numbers
+     */
+    @Test
+    public void testValueEquals() {
+
+        Complex posOne = new Complex(1, 0);
+        Complex posOneCopy = new Complex(1, 0);
+
+        assertTrue("Expected same values", posOne.valueEquals(posOneCopy));
+
+    }
+
+    @Test
+    public void testApproxValueEquals() {
+
+        Complex one = new Complex(1, 0);
+        Complex notOne = new Complex(1.1f, 0f);
+
+        assertFalse("Should not be equal", one.valueEquals(notOne, Complex.EPSILON));
 
     }
 

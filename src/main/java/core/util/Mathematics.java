@@ -62,6 +62,9 @@ public class Mathematics {
             Apfloat remainder = number.mod(Apfloat.ONE);
 
             fraction.add(integer);
+            if(remainder.equals(Apfloat.ZERO)){
+                break;
+            }
             number = Apfloat.ONE.divide(remainder);
             iter_count++;
 
@@ -88,28 +91,7 @@ public class Mathematics {
      */
     public static int[] continuedFraction(float number, int iterations) {
 
-        List<Integer> fraction = new ArrayList<Integer>();
-
-        int iter_count = 0;
-        while (iter_count < iterations && number < Float.POSITIVE_INFINITY) {
-
-            // Get the remainder and integer parts
-            int integer = (int) number;
-            float remainder = number % 1;
-
-            fraction.add(integer);
-            number = 1.0f / remainder;
-            iter_count++;
-
-        }
-
-        // TODO: Gotta be another way... is this too slow?
-        int[] result = new int[fraction.size()];
-        for(int i = 0; i < result.length; i++) {
-            result[i] = fraction.get(i);
-        }
-
-        return result;
+        return continuedFraction(new Apfloat(number), iterations);
 
     }
 
@@ -123,7 +105,9 @@ public class Mathematics {
      * @return the simple continued fraction in abbreviated notation
      */
     public static int[] continuedFraction(BigDecimal number, int iterations) {
-        throw new RuntimeException("Not yet implemented error");
+
+        return continuedFraction(new Apfloat(number), iterations);
+
     }
 
 }
