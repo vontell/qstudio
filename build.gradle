@@ -10,6 +10,13 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.7.1'
+}
+
+cobertura.coverageFormats = ['html', 'xml']
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
@@ -29,7 +36,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'org.jblas', name: 'jblas', version: '1.2.4'
     compile group: 'org.apfloat', name: 'apfloat', version: '1.8.2'
-    compile group: 'org.eluder.coveralls', name: 'coveralls-maven-plugin', version: '4.3.0'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'junit:junit:4.12'
 }
