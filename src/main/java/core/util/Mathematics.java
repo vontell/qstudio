@@ -1,6 +1,8 @@
 package core.util;
 
 import org.apfloat.Apfloat;
+import org.apfloat.Apint;
+import org.apfloat.ApintMath;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class Mathematics {
             "205696602405803815019351125338243003558764024749647326391419927260426992279678"+
             "235478163600934172164121992458631503028618297455570674983850549458858692699569"+
             "092721079750930295532116534498720275596023648066549911988183479775356636980742"+
-            "654252786255181841757467289097777279380008164706001614524919217321721477235014") ;
+            "654252786255181841757467289097777279380008164706001614524919217321721477235014");
 
     /**
      * Computes the continued fraction for the given number, up to a given number
@@ -129,6 +131,31 @@ public class Mathematics {
         }
 
         return a;
+
+    }
+
+    /**
+     * Finds the period of the function f(x) = X^r mod N, given
+     * N and X
+     * @param X the X to using in calculating r
+     * @return N the modulus of the function above
+     */
+    public static int findPeriodClassically(int X, int N) {
+
+        for(int r = 1; r < N; r++) {
+
+            Apint Xbig = new Apint(X);
+            Apint Nbig = new Apint(N);
+
+            Apint result = ApintMath.modPow(Xbig, new Apint(r), Nbig);
+            if (result.equals(Apint.ONE)) {
+                // We found an r!
+                return r;
+            }
+
+        }
+
+        throw new RuntimeException("There was a problem calculating r!");
 
     }
 

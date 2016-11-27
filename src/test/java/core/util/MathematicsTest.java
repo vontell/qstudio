@@ -1,5 +1,6 @@
 package core.util;
 
+import core.algorithms.ClassicalImpl;
 import org.apfloat.Apfloat;
 import org.junit.Test;
 
@@ -59,6 +60,22 @@ public class MathematicsTest {
 
         assertEquals("Expected correct array sizes", desired.length, floatResult.length);
         assertTrue("Expected correct representation", intArraysAreEqual(floatResult, desired));
+
+    }
+
+    /**
+     * Tests the continued fraction of a rational fraction, 768/1024
+     */
+    @Test
+    public void testContinuedFractionFraction() {
+
+        Apfloat fraction = new Apfloat(768, 100).divide(new Apfloat(1024, 100));
+        int[] desired = {0, 1, 3};
+
+        int[] result = Mathematics.continuedFraction(fraction, 10);
+
+        assertEquals("Expected correct array sizes", desired.length, result.length);
+        assertTrue("Expected correct representation", intArraysAreEqual(result, desired));
 
     }
 
