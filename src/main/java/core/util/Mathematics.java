@@ -1,5 +1,6 @@
 package core.util;
 
+import org.apfloat.Apcomplex;
 import org.apfloat.Apfloat;
 import org.apfloat.Apint;
 import org.apfloat.ApintMath;
@@ -135,10 +136,33 @@ public class Mathematics {
     }
 
     /**
+     * Computes the greatest common denominator of two positive high precision integers a and b, using
+     * Euclid's algorithm in an iterative approach
+     * More information at https://en.wikipedia.org/wiki/Greatest_common_divisor#Using_Euclid.27s_algorithm
+     * @param a The first high precision integer to compute the GCD with
+     * @param b The second high precision integer to compute the GCD with
+     * @return The greatest common denominator of a and b
+     */
+    public static Apint greatestCommonDenominator(Apint a, Apint b) {
+
+        while(!b.equals(Apint.ZERO)) {
+
+            Apint newB = a.mod(b);
+            a = b.add(Apcomplex.ZERO);
+            b = newB;
+
+        }
+
+        return a;
+
+    }
+
+    /**
      * Finds the period of the function f(x) = X^r mod N, given
      * N and X
      * @param X the X to using in calculating r
-     * @return N the modulus of the function above
+     * @param N the modulus of the function above
+     * @return the period of the function above
      */
     public static int findPeriodClassically(int X, int N) {
 
@@ -148,6 +172,29 @@ public class Mathematics {
             Apint Nbig = new Apint(N);
 
             Apint result = ApintMath.modPow(Xbig, new Apint(r), Nbig);
+            if (result.equals(Apint.ONE)) {
+                // We found an r!
+                return r;
+            }
+
+        }
+
+        throw new RuntimeException("There was a problem calculating r!");
+
+    }
+
+    /**
+     * Finds the period of the function f(x) = X^r mod N, given
+     * N and X, as high precision integers
+     * @param X the X to using in calculating r
+     * @param N the modules of the function above
+     * @return The period of the function above
+     */
+    public static Apint findPeriodClassically(Apint X, Apint N) {
+
+        for(Apint r = Apint.ONE; r.compareTo(N) == -1; r = r.add(Apint.ONE)) {
+
+            Apint result = ApintMath.modPow(X, r, N);
             if (result.equals(Apint.ONE)) {
                 // We found an r!
                 return r;

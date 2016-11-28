@@ -2,6 +2,7 @@ package core.util;
 
 import core.algorithms.ClassicalImpl;
 import org.apfloat.Apfloat;
+import org.apfloat.Apint;
 import org.junit.Test;
 
 import java.math.BigDecimal;
