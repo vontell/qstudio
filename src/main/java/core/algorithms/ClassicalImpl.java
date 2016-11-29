@@ -1,5 +1,6 @@
 package core.algorithms;
 
+import core.expection.InvalidParameterException;
 import core.util.Mathematics;
 import org.apfloat.Apint;
 import org.apfloat.ApintMath;
@@ -21,12 +22,17 @@ public class ClassicalImpl {
      * finding subroutine). Algorithm and notes can be found at
      * https://en.wikipedia.org/wiki/Shor's_algorithm or at
      * https://github.com/vontell/Quantum-Computing-Collection
-     * NOTE: This function is currently limited to very small N (< 100)
+     * NOTE: This function is currently limited to very small N (< 1000)
      * @param N The integer N = pq to find the prime factors of
      * @param verbose Prints out steps and calculations if set to True
      * @return A length 2 array which is [p, q], high precision
      */
     public static Apint[] shorsPrimeFactorization(int N, boolean verbose) {
+
+        // Initial check for bad N
+        if(N == 0) {
+            throw new InvalidParameterException("N = 0 has no prime factorization");
+        }
 
         // Pick a random number X < N
         int X = new Random().nextInt(N - 2) + 1;
@@ -40,12 +46,25 @@ public class ClassicalImpl {
 
         if(gcd != 1) {
 
+            Apint[] result;
+            if(gcd == N) {
+                result = new Apint[] {new Apint(gcd)};
+            } else {
+                result = new Apint[] {new Apint(gcd), new Apint(N / gcd)};
+            }
+
             if(verbose) {
-                System.out.println("Good guess on X. Factors are " + gcd + " and " + (N / gcd));
+
+                if(result.length == 1) {
+                    System.out.println("Good guess on X. Factor is " + gcd);
+                } else {
+                    System.out.println("Good guess on X. Factors are " + gcd + " and " + (N / gcd));
+                }
+
             }
 
             // Found a nontrivial factor! Lucky you!
-            return new Apint[] {new Apint(gcd), new Apint(N / gcd)};
+            return result;
 
         }
 

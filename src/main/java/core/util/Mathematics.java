@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A class of static methods for completing certain mathematical computations
  * @author Aaron Vontell
- * @version 0.1
+ * @version 0.3
  */
 public class Mathematics {
 
@@ -166,20 +166,7 @@ public class Mathematics {
      */
     public static int findPeriodClassically(int X, int N) {
 
-        for(int r = 1; r < N; r++) {
-
-            Apint Xbig = new Apint(X);
-            Apint Nbig = new Apint(N);
-
-            Apint result = ApintMath.modPow(Xbig, new Apint(r), Nbig);
-            if (result.equals(Apint.ONE)) {
-                // We found an r!
-                return r;
-            }
-
-        }
-
-        throw new RuntimeException("There was a problem calculating r!");
+        return findPeriodClassically(new Apint(X), new Apint(N)).intValue();
 
     }
 

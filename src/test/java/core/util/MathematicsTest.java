@@ -1,6 +1,5 @@
 package core.util;
 
-import core.algorithms.ClassicalImpl;
 import org.apfloat.Apfloat;
 import org.apfloat.Apint;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for static mathematical methods
  * @author Aaron Vontell
- * @version 0.1
+ * @version 0.2
  */
 public class MathematicsTest {
 
@@ -124,6 +123,55 @@ public class MathematicsTest {
     public void testGCDisOne() {
 
         int result = Mathematics.greatestCommonDenominator(13, 27);
+
+        assertEquals("Expected GCD of a", 1, result);
+
+    }
+
+    /**
+     * Computes the GCD when b is already zero (arbitrary precision)
+     */
+    @Test
+    public void testGCDBisZeroAP() {
+
+        int result = Mathematics.greatestCommonDenominator(new Apint(312), new Apint(0)).intValue();
+
+        assertEquals("Expected GCD of a", 312, result);
+
+    }
+
+    /**
+     * Computes the GCD when b is greater than a (arbitrary precision)
+     */
+    @Test
+    public void testGCDAisGreaterAP() {
+
+        int result = Mathematics.greatestCommonDenominator(new Apint(32), new Apint(456)).intValue();
+
+        assertEquals("Expected correct GCD", 8, result);
+
+    }
+
+    /**
+     * Computes the GCD when a and b are equal (arbitrary precision)
+     */
+    @Test
+    public void testGCDAisBAP() {
+
+        int result = Mathematics.greatestCommonDenominator(new Apint(32), new Apint(32)).intValue();
+
+        assertEquals("Expected GCD of a or b", 32, result);
+
+    }
+
+    /**
+     * Computers the GCD when the GCD of a and b is 1 (arbitrary precision)
+     * i.e. a and b are prime numbers
+     */
+    @Test
+    public void testGCDisOneAP() {
+
+        int result = Mathematics.greatestCommonDenominator(new Apint(13), new Apint(27)).intValue();
 
         assertEquals("Expected GCD of a", 1, result);
 
