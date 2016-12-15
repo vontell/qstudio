@@ -80,7 +80,7 @@ public class ClassicalImpl {
 
         // Compute the prime factors p and q!
         Apint a = ApintMath.pow(bigX, r.intValue()/2).add(Apint.ONE);
-        Apint b = ApintMath.pow(bigX, r.intValue()/2).subtract(Apint.ONE);
+        Apint b = a.subtract(Apint.ONE.add(Apint.ONE));
 
         if(verbose) {
             System.out.println("Found (x^{r/2} + 1): " + a);
