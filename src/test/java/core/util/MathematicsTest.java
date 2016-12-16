@@ -132,12 +132,10 @@ public class MathematicsTest {
     /**
      * Computes the GCD when b is already zero (arbitrary precision)
      */
-    @Test
+    @Test(expected = InvalidParameterException.class)
     public void testGCDBisZeroAP() {
 
         int result = Mathematics.greatestCommonDenominator(new Apint(312), new Apint(0)).intValue();
-
-        assertEquals("Expected GCD of a", 312, result);
 
     }
 
@@ -213,22 +211,22 @@ public class MathematicsTest {
     }
 
     /**
-     * Finds the period r of x^r mod N for when X is zero
+     * Finds the period r of x^r mod N for when X is zero (should throw an exception)
      */
-    @Test
+    @Test(expected = InvalidParameterException.class)
     public void testFindPeriodClassicallyZeroX() {
 
-        assertTrue(false);
+        Mathematics.findPeriodClassically(0, 3);
 
     }
 
     /**
      * Finds the period r of x^r mod N when x and N are (not coprime?)
      */
-    @Test
+    @Test(expected = InvalidParameterException.class)
     public void testFindPeriodClassicallyNoPeriod() {
 
-        assertTrue(false);
+        Mathematics.findPeriodClassically(3, 9);
 
     }
 

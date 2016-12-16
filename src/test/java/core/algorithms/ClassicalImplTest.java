@@ -2,6 +2,7 @@ package core.algorithms;
 
 import core.expection.InvalidParameterException;
 import org.apfloat.Apint;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of 0, which should throw an exception
      */
+    @Ignore("Method not yet implemented")
     @Test(expected = InvalidParameterException.class)
     public void shorsClassicalNisZero() {
 
@@ -38,6 +40,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N when N is a prime
      */
+    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisPrime() {
 
@@ -52,6 +55,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N = p*p, where p is a prime
      */
+    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisSemiprimeSame() {
 
@@ -67,6 +71,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N = p*q, where p and q are primes
      */
+    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisDistinctSemiprime() {
 
@@ -92,6 +97,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N=p*q*r, where p, q, and r are primes
      */
+    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisCompositeDistinct() {
 
@@ -115,6 +121,7 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorizatino of N=p*p*p, where p is a prime
      */
+    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisCompositeSame() {
 

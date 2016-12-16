@@ -185,6 +185,16 @@ public class Mathematics {
      */
     public static Apint findPeriodClassically(Apint X, Apint N) {
 
+        // Initial check for invalid parameters
+        if(X.equals(Apint.ZERO) || N.equals(Apint.ZERO)) {
+            throw new InvalidParameterException("Either X or N was zero");
+        }
+
+        // Check if there is a period
+        if(greatestCommonDenominator(X, N).compareTo(Apint.ONE) == 1) {
+            throw new InvalidParameterException("X and N do not have a period in x^r mod N");
+        }
+
         for(Apint r = Apint.ONE; r.compareTo(N) == -1; r = r.add(Apint.ONE)) {
 
             Apint result = ApintMath.modPow(X, r, N);

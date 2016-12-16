@@ -25,6 +25,7 @@ public class ClassicalImpl {
      * https://en.wikipedia.org/wiki/Shor's_algorithm or at
      * https://github.com/vontell/Quantum-Computing-Collection
      * NOTE: This function is currently limited to very small N (< 1000)
+     * TODO: This is not finished and should not be used
      * @param N The integer N = pq to find the prime factors of
      * @param verbose Prints out steps and calculations if set to True
      * @return A length 2 array which is [p, q], high precision
