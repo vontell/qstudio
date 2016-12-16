@@ -1,5 +1,6 @@
 package core.util;
 
+import core.expection.InvalidParameterException;
 import org.apfloat.Apcomplex;
 import org.apfloat.Apfloat;
 import org.apfloat.Apint;
@@ -41,6 +42,7 @@ public class Mathematics {
             "235478163600934172164121992458631503028618297455570674983850549458858692699569"+
             "092721079750930295532116534498720275596023648066549911988183479775356636980742"+
             "654252786255181841757467289097777279380008164706001614524919217321721477235014");
+
 
     /**
      * Computes the continued fraction for the given number, up to a given number
@@ -144,6 +146,10 @@ public class Mathematics {
      * @return The greatest common denominator of a and b
      */
     public static Apint greatestCommonDenominator(Apint a, Apint b) {
+
+        if(b.equals(Apint.ZERO)) {
+            throw new InvalidParameterException("N cannot be 0, modulo by 0");
+        }
 
         while(!b.equals(Apint.ZERO)) {
 

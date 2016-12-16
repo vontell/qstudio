@@ -1,6 +1,6 @@
 package core.util;
 
-import core.algorithms.ClassicalImpl;
+import core.expection.InvalidParameterException;
 import org.apfloat.Apfloat;
 import org.apfloat.Apint;
 import org.junit.Test;
@@ -175,6 +175,60 @@ public class MathematicsTest {
         int result = Mathematics.greatestCommonDenominator(new Apint(13), new Apint(27)).intValue();
 
         assertEquals("Expected GCD of a", 1, result);
+
+    }
+
+    /**
+     * Finds the period r of x^r mod N for an integer x and N
+     */
+    @Test
+    public void testFindPeriodClassicallyInt() {
+
+        int period = Mathematics.findPeriodClassically(3, 5);
+
+        assertEquals("Expected period of 4", 4, period);
+
+    }
+
+    /**
+     * Finds the period r of x^r mod N for an arbitrary precision integer x and N
+     */
+    @Test
+    public void testFindPeriodClassicallyApint() {
+
+        Apint period = Mathematics.findPeriodClassically(new Apint(3), new Apint(5));
+
+        assertEquals("Expected period of 4", new Apint(4), period);
+
+    }
+
+    /**
+     * Finds the period r of x^r mod N for when N is zero (should throw an exception)
+     */
+    @Test(expected = InvalidParameterException.class)
+    public void testFindPeriodClassicallyInvalid() {
+
+        Mathematics.findPeriodClassically(3, 0);
+
+    }
+
+    /**
+     * Finds the period r of x^r mod N for when X is zero
+     */
+    @Test
+    public void testFindPeriodClassicallyZeroX() {
+
+        assertTrue(false);
+
+    }
+
+    /**
+     * Finds the period r of x^r mod N when x and N are (not coprime?)
+     */
+    @Test
+    public void testFindPeriodClassicallyNoPeriod() {
+
+        assertTrue(false);
 
     }
 
