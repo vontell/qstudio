@@ -199,4 +199,21 @@ public class Mathematics {
 
     }
 
+    /**
+     *
+     * Returns true is the given number is prime, or false otherwise
+     * @param number The number to test for primality
+     * @return true if number is prime
+     */
+    public static boolean isPrime(int number) {
+        //check if n is a multiple of 2
+        if (number%2==0) return false;
+        //if not, then just check the odds
+        for(int i=3;i*i<=number;i+=2) {
+            if(number%i==0)
+                return false;
+        }
+        return true;
+    }
+
 }

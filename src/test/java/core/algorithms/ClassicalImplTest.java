@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.TreeSet;
 
 import static org.junit.Assert.*;
@@ -41,9 +42,9 @@ public class ClassicalImplTest {
     public void shorsClassicalNisPrime() {
 
         for(int i = 0; i < 20; i++) {
-            Apint[] factors = ClassicalImpl.shorsPrimeFactorization(7, true);
-            assertEquals("Expected one factor", 1, factors.length);
-            assertEquals("Expected factor of 7", 7, factors[0].intValue());
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(7, true);
+            assertEquals("Expected one factor", 1, factors.size());
+            assertEquals("Expected factor of 7", 7, factors.get(0).intValue());
         }
 
     }
@@ -55,10 +56,10 @@ public class ClassicalImplTest {
     public void shorsClassicalNisSemiprimeSame() {
 
         for(int i = 0; i < 20; i++) {
-            Apint[] factors = ClassicalImpl.shorsPrimeFactorization(7*7, true);
-            assertEquals("Expected two factors", 2, factors.length);
-            assertEquals("Expected factor of 7", 7, factors[0].intValue());
-            assertEquals("Expected factor of 7", 7, factors[1].intValue());
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(7*7, true);
+            assertEquals("Expected two factors", 2, factors.size());
+            assertEquals("Expected factor of 7", 7, factors.get(0).intValue());
+            assertEquals("Expected factor of 7", 7, factors.get(1).intValue());
         }
 
     }
@@ -71,14 +72,14 @@ public class ClassicalImplTest {
 
         for(int i = 0; i < 20; i++) {
 
-            Apint[] factors = ClassicalImpl.shorsPrimeFactorization(13*23, true);
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(13*23, true);
 
-            assertEquals("Expected two factors", 2, factors.length);
+            assertEquals("Expected two factors", 2, factors.size());
 
             // Construct set
-            TreeSet<Apint> orderedApints = new TreeSet<Apint>();
-            orderedApints.add(factors[0]);
-            orderedApints.add(factors[1]);
+            TreeSet<Integer> orderedApints = new TreeSet<Integer>();
+            orderedApints.add(factors.get(0));
+            orderedApints.add(factors.get(1));
 
             assertEquals("Expected two distinct factors", 2, orderedApints.size());
             assertEquals("Expected factor of 13", 13, orderedApints.first().intValue());
@@ -96,20 +97,16 @@ public class ClassicalImplTest {
 
         for(int i = 0; i < 20; i++) {
 
-            Apint[] factors = ClassicalImpl.shorsPrimeFactorization(13*23*7, true);
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(13*23*7, true);
 
-            assertEquals("Expected three factors", 3, factors.length);
+            assertEquals("Expected three factors", 3, factors.size());
 
             // Construct ordered list
-            ArrayList<Apint> factorList = new ArrayList<Apint>();
-            factorList.add(factors[0]);
-            factorList.add(factors[1]);
-            factorList.add(factors[2]);
-            Collections.sort(factorList);
+            Collections.sort(factors);
 
-            assertEquals("Expected factor of 7", 7, factorList.get(0).intValue());
-            assertEquals("Expected factor of 13", 13, factorList.get(1).intValue());
-            assertEquals("Expected factor of 23", 23, factorList.get(2).intValue());
+            assertEquals("Expected factor of 7", 7, factors.get(0).intValue());
+            assertEquals("Expected factor of 13", 13, factors.get(1).intValue());
+            assertEquals("Expected factor of 23", 23, factors.get(2).intValue());
 
         }
 
@@ -123,20 +120,16 @@ public class ClassicalImplTest {
 
         for(int i = 0; i < 20; i++) {
 
-            Apint[] factors = ClassicalImpl.shorsPrimeFactorization(7*7*7, true);
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(7*7*7, true);
 
-            assertEquals("Expected three factors", 3, factors.length);
+            assertEquals("Expected three factors", 3, factors.size());
 
             // Construct ordered list
-            ArrayList<Apint> factorList = new ArrayList<Apint>();
-            factorList.add(factors[0]);
-            factorList.add(factors[1]);
-            factorList.add(factors[2]);
-            Collections.sort(factorList);
+            Collections.sort(factors);
 
-            assertEquals("Expected factor of 7", 7, factorList.get(0).intValue());
-            assertEquals("Expected factor of 7", 7, factorList.get(1).intValue());
-            assertEquals("Expected factor of 7", 7, factorList.get(2).intValue());
+            assertEquals("Expected factor of 7", 7, factors.get(0).intValue());
+            assertEquals("Expected factor of 7", 7, factors.get(1).intValue());
+            assertEquals("Expected factor of 7", 7, factors.get(2).intValue());
 
         }
 
