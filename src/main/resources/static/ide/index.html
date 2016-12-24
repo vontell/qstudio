@@ -3,11 +3,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="css/layout.css">
 </head>
 <body ng-app="IdeApp" ng-cloak>
   
   <!-- MAIN MENU BAR -->
-  <div ng-controller="DemoBasicCtrl as ctrl" ng-cloak>
+  <div ng-controller="MainMenuController as ctrl" ng-cloak>
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
       <md-toolbar-filler layout layout-align="center center">
@@ -32,7 +33,7 @@
                 </md-menu>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('Open', $event)">
+                <md-button ng-click="openFile($event)">
                   Open...
                   <span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span>
                 </md-button>
@@ -127,16 +128,10 @@
                   <md-menu-content width="3">
                     <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'presentation'">Presentation</md-menu-item>
                     <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'edit'">Edit</md-menu-item>
-                    <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'modifiable'">Modifiable</md-menu-item>
                   </md-menu-content>
                 </md-menu>
               </md-menu-item>
               <md-menu-divider></md-menu-divider>
-              <md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler</md-menu-item>
-              <md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar</md-menu-item>
-              <md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions</md-menu-item>
-              <md-menu-divider></md-menu-divider>
-              <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
               <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
             </md-menu-content>
           </md-menu>
@@ -144,13 +139,21 @@
       </div>
     </div>
   </md-toolbar>
-
-  <md-content class="page-container">
-    <!-- Main content goes here -->
-  </md-content>
-    
   </div>
   <!-- /MAIN MENU BAR -->
+  
+  <md-content class="page-container" layout="column">
+    
+    <div class="ide-container dropzone">
+    </div>
+    
+  </md-content>
+  
+  <!-- Editor Tabbing -->
+  <div ng-controller="EditorTabController" ng-cloak>
+
+  </div>
+  <!-- /Editing Tabbing -->
   
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -160,6 +163,9 @@
 
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  
+  <!-- interact.js for the IDE -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.6/interact.min.js"></script>
   
   <!-- Your application bootstrap  -->
   <script src="js/color.js"></script>

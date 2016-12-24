@@ -26,14 +26,19 @@ app.filter('keyboardShortcut', function($window) {
     };
   });
 
-/* Configuration for main menu bar */
-app.controller('DemoBasicCtrl', function DemoCtrl($mdDialog) {
-    this.settings = {
-      printLayout: true,
-      showRuler: true,
-      showSpellingSuggestions: true,
-      presentationMode: 'edit'
+/* Controller for the open dialog */
+app.controller('OpenDialogController', function OpenDialogController($scope, $mdDialog) {
+    
+    $scope.cancel = function() {
+        $mdDialog.cancel();
     };
+    
+});
+
+/* Controller for main menu bar */
+app.controller('MainMenuController', function MainMenuController($mdDialog, $scope) {
+  
+  this.settings = {} //Use this as a config for toggleable settings
 
     this.sampleAction = function(name, ev) {
       $mdDialog.show($mdDialog.alert()
@@ -43,4 +48,26 @@ app.controller('DemoBasicCtrl', function DemoCtrl($mdDialog) {
         .targetEvent(ev)
       );
     };
-  });
+  
+  $scope.openFile = function(ev) {
+    $mdDialog.show({
+      controller: "OpenDialogController",
+      templateUrl: 'templates/open-dialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: false // Only for -xs, -sm breakpoints.
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+  };
+  
+});
+
+/* Controller for editor tab controller */
+app.controller('EditorTabController', function EditorTabController($scope) {
+    $scope.currentNavItem = 'page1';
+});
