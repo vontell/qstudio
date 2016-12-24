@@ -4,8 +4,9 @@
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/color.css">
 </head>
-<body ng-app="IdeApp" ng-cloak>
+<body ng-app="IdeApp" ng-controller="MainController" ng-cloak>
   
   <!-- MAIN MENU BAR -->
   <div ng-controller="MainMenuController as ctrl" ng-cloak>
@@ -124,10 +125,19 @@
               <md-menu-item type="checkbox" ng-model="ctrl.settings.printLayout">Print layout</md-menu-item>
               <md-menu-item class="md-indent">
                 <md-menu>
-                  <md-button ng-click="$mdOpenMenu()">Mode</md-button>
+                  <md-button ng-click="$mdOpenMenu()">Editor Mode</md-button>
                   <md-menu-content width="3">
+                    <md-menu-item type="radio" ng-model="settings.circuitMode" ng-value="true">Circuit Editor</md-menu-item>
+                    <md-menu-item type="radio" ng-model="settings.circuitMode" ng-value="false">Code Editor</md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+              <md-menu-item class="md-indent">
+                <md-menu>
+                  <md-button ng-click="$mdOpenMenu()">Viewing Mode</md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'default'">Default</md-menu-item>
                     <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'presentation'">Presentation</md-menu-item>
-                    <md-menu-item type="radio" ng-model="ctrl.settings.presentationMode" value="'edit'">Edit</md-menu-item>
                   </md-menu-content>
                 </md-menu>
               </md-menu-item>
@@ -142,18 +152,43 @@
   </div>
   <!-- /MAIN MENU BAR -->
   
-  <md-content class="page-container" layout="column">
+  <md-content class="page-container room-for-tabs" layout="row">
     
-    <div class="ide-container dropzone">
+    <!-- PANE FOR GATES / COMPONENTS -->
+    <div id="ide-gates" layout-fill>
+    </div>
+    <!-- / GATE PANE -->
+    
+    <div id="editor-pane" layout="column" layout-fill>
+
+      <!-- PANE FOR CIRCUIT -->
+      <div id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-show="settings.circuitMode">
+        IN CIRCUIT MODE
+      </div>
+      <!-- / CIRCUIT PANE -->
+        
+      <!-- PANE FOR CODE EDITOR -->
+      <div id="code-editor" class="ide-container room-for-tabs" ng-hide="settings.circuitMode">
+        IN CODE MODE
+      </div>
+      <!-- / CODE PANE -->
+      
+      <!-- Editor Tabbing -->
+      <div ng-controller="EditorTabController" ng-cloak>
+        <md-nav-bar id="editor-tabs" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links" md-nav-align="bottom">
+          <md-nav-item md-nav-click="gotoCircuit(true)" name="circuitTab">Circuit Editor</md-nav-item>
+          <md-nav-item md-nav-click="gotoCircuit(false)" name="codeTab">Code Editor</md-nav-item>
+          <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
+          <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
+          <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
+          -->
+        </md-nav-bar>
+      </div>
+      <!-- /Editing Tabbing -->
+      
     </div>
     
   </md-content>
-  
-  <!-- Editor Tabbing -->
-  <div ng-controller="EditorTabController" ng-cloak>
-
-  </div>
-  <!-- /Editing Tabbing -->
   
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>

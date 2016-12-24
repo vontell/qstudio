@@ -4,6 +4,16 @@ var app = angular.module('IdeApp', ['ngMaterial']);
 /* Color / theming configuration */
 app.config(coloring);
 
+/* Main controller with settings within rootScope for cross-pane settings */
+app.controller('MainController', function MainController($scope, $rootScope) {
+    
+    $rootScope.settings = {
+        circuitMode: true,      // True = Circuit Editor, False = Code Editor
+        
+    }
+    
+});
+
 /* Configuration for keyboard shortcut string creation */
 app.filter('keyboardShortcut', function($window) {
     return function(str) {
@@ -38,8 +48,6 @@ app.controller('OpenDialogController', function OpenDialogController($scope, $md
 /* Controller for main menu bar */
 app.controller('MainMenuController', function MainMenuController($mdDialog, $scope) {
   
-  this.settings = {} //Use this as a config for toggleable settings
-
     this.sampleAction = function(name, ev) {
       $mdDialog.show($mdDialog.alert()
         .title(name)
@@ -68,6 +76,11 @@ app.controller('MainMenuController', function MainMenuController($mdDialog, $sco
 });
 
 /* Controller for editor tab controller */
-app.controller('EditorTabController', function EditorTabController($scope) {
-    $scope.currentNavItem = 'page1';
+app.controller('EditorTabController', function EditorTabController($scope, $rootScope) {
+    
+    // Updates the setting for which editor the user is viewing
+    $scope.gotoCircuit = function(isCircuitView) {
+        $rootScope.settings.circuitMode = isCircuitView;
+    }
+  
 });

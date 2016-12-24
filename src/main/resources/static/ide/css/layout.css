@@ -1,1 +1,10 @@
 /* Styling for layouts */
+
+#ide-gates {
+    width: 256px;
+    background: red;
+}
+
+.room-for-tabs {
+    height: calc(100vh - 96px);
+}
