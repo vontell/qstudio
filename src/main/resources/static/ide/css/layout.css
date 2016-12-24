@@ -8,3 +8,12 @@
 .room-for-tabs {
     height: calc(100vh - 96px);
 }
+
+.logo-image {
+  height: 52px;
+  width: 52px;
+}
+
+.logo-button {
+  width: 52px;
+}

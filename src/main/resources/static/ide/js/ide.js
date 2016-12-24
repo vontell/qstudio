@@ -8,8 +8,16 @@ app.config(coloring);
 app.controller('MainController', function MainController($scope, $rootScope) {
     
     $rootScope.settings = {
-        circuitMode: true,      // True = Circuit Editor, False = Code Editor
-        
+        circuitMode: true,                              // True = Circuit Editor, False = Code Editor
+        codeStyle: {                                    // ngStyle for the code editor
+            background: "#263238",                      // Blue Grey 900
+            color: "#FFFFFF",                           // Default font color of white
+            'font-family': "'Ubuntu Mono', monospace",  // Default 'Ubuntu' monospace font
+            'font-size': "18px"                         // Default 18px font size
+        },
+        circuitStyle: {                                 // ngStyle for the circuit editor
+            background: "#CFD8DC"
+        }
     }
     
 });

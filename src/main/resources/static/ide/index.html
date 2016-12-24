@@ -3,8 +3,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet"> <!-- Font for code -->
+  <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet"> <!-- Font for math -->
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/color.css">
+  <link rel="stylesheet" href="css/gates.css">
 </head>
 <body ng-app="IdeApp" ng-controller="MainController" ng-cloak>
   
@@ -13,7 +16,9 @@
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
       <md-toolbar-filler layout layout-align="center center">
-        <md-icon md-svg-icon="call:chat"></md-icon>
+        <md-button class="md-icon logo-button" aria-label="QStudio Home">
+         <img class="logo-image" src="img/qstudio.png" alt="QStudio Logo">
+        </md-button>
       </md-toolbar-filler>
 
       <div>
@@ -122,7 +127,6 @@
               View
             </button>
             <md-menu-content>
-              <md-menu-item type="checkbox" ng-model="ctrl.settings.printLayout">Print layout</md-menu-item>
               <md-menu-item class="md-indent">
                 <md-menu>
                   <md-button ng-click="$mdOpenMenu()">Editor Mode</md-button>
@@ -152,7 +156,7 @@
   </div>
   <!-- /MAIN MENU BAR -->
   
-  <md-content class="page-container room-for-tabs" layout="row">
+  <div class="page-container room-for-tabs" layout="row">
     
     <!-- PANE FOR GATES / COMPONENTS -->
     <div id="ide-gates" layout-fill>
@@ -162,15 +166,61 @@
     <div id="editor-pane" layout="column" layout-fill>
 
       <!-- PANE FOR CIRCUIT -->
-      <div id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-show="settings.circuitMode">
+      <div id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-style="settings.circuitStyle" ng-show="settings.circuitMode">
         IN CIRCUIT MODE
+        
+        <div class="gate hadamard draggable">
+          H
+        </div>
+        
       </div>
       <!-- / CIRCUIT PANE -->
         
       <!-- PANE FOR CODE EDITOR -->
-      <div id="code-editor" class="ide-container room-for-tabs" ng-hide="settings.circuitMode">
-        IN CODE MODE
-      </div>
+      <md-content id="code-editor" class="ide-container room-for-tabs" ng-style="settings.codeStyle" ng-hide="settings.circuitMode" layout-padding>
+          <p># <br />
+          # File: test13.qasm<br />
+          # Date: 22-Mar-04<br />
+          # Author: I. Chuang <br />
+          #<br />
+          # Sample qasm input file - three-qubit phase<br />
+          # estimation circuit with QFT and controlled-U</p>
+
+          <p> defbox CU,3,1,'U'<br />
+           defbox CU2,3,1,'U^2'<br />
+           defbox CU4,3,1,'U^4'<br />
+           def c-S,1,'S'<br />
+           def c-T,1,'T'</p>
+
+          <p> qubit j0,0 # QFT qubits<br />
+           qubit j1,0<br />
+           qubit j2,0<br />
+           qubit s0 # U qubits<br />
+           qubit s1</p>
+
+          <p> h j0 # equal superposition<br />
+           h j1<br />
+           h j2</p>
+
+          <p> CU4 j0,s0,s1 # controlled-U<br />
+           CU2 j1,s0,s1<br />
+           CU j2,s0,s1</p>
+
+          <p> h j0 # QFT<br />
+           c-S j0,j1<br />
+           h j1<br />
+           nop j0<br />
+           c-T j0,j2<br />
+           c-S j1,j2<br />
+           h j2<br />
+           nop j0<br />
+           nop j0<br />
+           nop j1<br />
+           <br />
+           measure j0 # final measurement<br />
+           measure j1 <br />
+           measure j2</p>
+      </md-content>
       <!-- / CODE PANE -->
       
       <!-- Editor Tabbing -->
@@ -188,7 +238,7 @@
       
     </div>
     
-  </md-content>
+  </div>
   
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -201,6 +251,7 @@
   
   <!-- interact.js for the IDE -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.6/interact.min.js"></script>
+  <script src="js/interact.js"></script>
   
   <!-- Your application bootstrap  -->
   <script src="js/color.js"></script>
