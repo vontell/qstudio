@@ -1,5 +1,6 @@
 package core.util;
 
+import core.expection.InvalidParameterException;
 import org.apfloat.Apcomplex;
 import org.apfloat.Apfloat;
 import org.apfloat.ApfloatMath;
@@ -73,7 +74,6 @@ public class ComplexTest {
 
     }
 
-
     /**
      * Tests the behavior of normalizing a point with no magnitude
      */
@@ -86,7 +86,6 @@ public class ComplexTest {
         complexNumber.getNormalized();
 
     }
-
 
     /**
      * Tests the behavior of phase calculation at
@@ -141,6 +140,10 @@ public class ComplexTest {
 
     }
 
+    /**
+     * Test to make sure that the desired epsilon does not allow
+     * obviously unequal values to be equal
+     */
     @Test
     public void testApproxValueEquals() {
 
@@ -148,6 +151,56 @@ public class ComplexTest {
         Complex notOne = new Complex(1.1f, 0f);
 
         assertFalse("Should not be equal", one.valueEquals(notOne, Complex.EPSILON));
+
+    }
+
+    /**
+     * Tests add, subtract, multiply, divide, exponentiate, and square on
+     * valid complex values
+     */
+    @Test
+    public void testValidOperations() {
+
+        Complex one = new Complex(1,0);
+        Complex twoTwo = new Complex(2,2);
+        Complex threeOne = new Complex(3, 1);
+
+        // Test added
+        Complex added = one.add(threeOne);
+        assertTrue("Added should be 4 + i", new Complex(4, 1).valueEquals(added));
+
+        // Test subtract
+        Complex subtracted = one.subtract(threeOne);
+        assertTrue("Subtracted should be -2 - i", new Complex(-2, -1).valueEquals(subtracted));
+
+        // Test multiply
+        Complex multiplied = twoTwo.multiply(threeOne);
+        assertTrue("Multiplied should be 4 + 8i", new Complex(4, 8).valueEquals(multiplied));
+
+        // Test divide
+        Complex divided = twoTwo.divide(threeOne);
+        System.out.print(divided);
+        assertTrue("Divided should be 0.8 + 0.4i", new Complex(0.8f, 0.4f).valueEquals(divided));
+
+        // Test exponentiate
+        Complex exponentiated = twoTwo.exponentiate(3);
+        assertTrue("Exponentiated should be -16 + 16i", new Complex(-16, 16).valueEquals(exponentiated));
+
+        // Test square
+        Complex squared = twoTwo.square();
+        assertTrue("Squared should be 8i", new Complex(0, 8).valueEquals(squared));
+
+    }
+
+    /**
+     * Tests division by zero (i.e. an invalid operation)
+     */
+    @Test(expected = InvalidParameterException.class)
+    public void testInvalidOperations() {
+
+        Complex zero = new Complex(0, 0);
+        Complex twoTwo = new Complex(2, 2);
+        twoTwo.divide(zero);
 
     }
 

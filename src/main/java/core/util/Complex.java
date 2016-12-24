@@ -1,5 +1,6 @@
 package core.util;
 
+import core.expection.InvalidParameterException;
 import org.apfloat.Apcomplex;
 import org.apfloat.ApcomplexMath;
 import org.apfloat.Apfloat;
@@ -138,6 +139,77 @@ public class Complex {
     }
 
     /**
+     * Adds this complex number to another complex number, returning
+     * the result
+     * @param other The complex number to add to this one
+     * @return The new complex number which is this + other
+     */
+    public Complex add(Complex other) {
+        Apcomplex complexVal = complexValue.add(other.complexValue);
+        return new Complex(complexVal.real(), complexVal.imag());
+    }
+
+    /**
+     * Subtracts another complex number from this complex number, returning
+     * the result
+     * @param other The complex number to subtract from this one
+     * @return The new complex number which is this - other
+     */
+    public Complex subtract(Complex other) {
+        Apcomplex complexVal = complexValue.subtract(other.complexValue);
+        return new Complex(complexVal.real(), complexVal.imag());
+    }
+
+    /**
+     * Divides this complex number by another complex number, returning
+     * the result
+     * @param other The complex number to divide this complex number by
+     * @return The new complex number which is this / other
+     */
+    public Complex divide(Complex other) {
+
+        // Make sure to not divide by zero
+        if(other.valueEquals(new Complex(0, 0), EPSILON)) {
+            throw new InvalidParameterException("Cannot divide by zero");
+        }
+
+        Apcomplex complexVal = complexValue.divide(other.complexValue);
+        return new Complex(complexVal.real(), complexVal.imag());
+    }
+
+    /**
+     * Multiplies this complex number by another complex number, returning
+     * the result
+     * @param other The complex number to multiply this complex number by
+     * @return The new complex number which is this * other
+     */
+    public Complex multiply(Complex other) {
+        Apcomplex complexVal = complexValue.multiply(other.complexValue);
+        return new Complex(complexVal.real(), complexVal.imag());
+    }
+
+    /**
+     * Computes the result of this complex to the exp power
+     * @param exp The power to raise this complex number to
+     * @return The new complex number which is this ^ exp
+     */
+    public Complex exponentiate(int exp) {
+        Apcomplex newVal = complexValue;
+        for (int i = 1; i < exp; i++) {
+            newVal = newVal.multiply(complexValue);
+        }
+        return new Complex(newVal.real(), newVal.imag());
+    }
+
+    /**
+     * Computes the result of this complex squared
+     * @return The new complex number which is this ^ 2
+     */
+    public Complex square() {
+        return exponentiate(2);
+    }
+
+    /**
      * Rotate this complex number in the complex plane by the given
      * amount in radians
      * @param radians The angle to rotate this vector by counterclockwise
@@ -180,8 +252,8 @@ public class Complex {
      * @return if these two complex numbers are equivalent
      */
     public boolean valueEquals(Complex other) {
-        return getRealPart().equals(other.getRealPart()) &&
-                getImaginaryPart().equals(other.getImaginaryPart());
+        return getRealPart().floatValue() == other.getRealPart().floatValue() &&
+                getImaginaryPart().floatValue() == other.getImaginaryPart().floatValue();
     }
 
     /**
