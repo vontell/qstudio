@@ -1,5 +1,6 @@
 package core.util;
 
+import core.algorithms.ClassicalImpl;
 import core.expection.InvalidParameterException;
 import org.apfloat.Apfloat;
 import org.apfloat.Apint;
@@ -16,6 +17,13 @@ import static org.junit.Assert.*;
  */
 public class MathematicsTest {
 
+    /**
+     * Simple test for coverage on the class name
+     */
+    @Test
+    public void constructTest() {
+        new Mathematics();
+    }
 
     /**
      * Tests the continued fraction expansion of an integer

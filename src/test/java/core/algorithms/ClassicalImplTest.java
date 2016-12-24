@@ -29,6 +29,14 @@ public class ClassicalImplTest {
     // ------------------------------------------------------------------------
 
     /**
+     * Simple test for coverage on the class name
+     */
+    @Test
+    public void constructTest() {
+        new ClassicalImpl();
+    }
+
+    /**
      * Tests the prime factorization of 0, which should throw an exception
      */
     @Test(expected = InvalidParameterException.class)

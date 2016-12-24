@@ -195,17 +195,19 @@ public class Mathematics {
             throw new InvalidParameterException("X and N do not have a period in x^r mod N");
         }
 
+        Apint period = null;
         for(Apint r = Apint.ONE; r.compareTo(N) == -1; r = r.add(Apint.ONE)) {
 
             Apint result = ApintMath.modPow(X, r, N);
             if (result.equals(Apint.ONE)) {
                 // We found an r!
-                return r;
+                period = r;
+                break;
             }
 
         }
 
-        throw new RuntimeException("There was a problem calculating r!");
+        return period;
 
     }
 
