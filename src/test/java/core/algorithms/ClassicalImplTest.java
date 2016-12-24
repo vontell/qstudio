@@ -24,12 +24,13 @@ public class ClassicalImplTest {
     // Tests for Shor's Algorithm with a classical period finding sub-routine
     // Since this algorithm is slightly randomized (in picking X), multiple
     // iterations of each test are run.
+    //
+    // TODO: This currently relies on an inefficient primality test
     // ------------------------------------------------------------------------
 
     /**
      * Tests the prime factorization of 0, which should throw an exception
      */
-    @Ignore("Method not yet implemented")
     @Test(expected = InvalidParameterException.class)
     public void shorsClassicalNisZero() {
 
@@ -40,7 +41,6 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N when N is a prime
      */
-    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisPrime() {
 
@@ -55,7 +55,6 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N = p*p, where p is a prime
      */
-    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisSemiprimeSame() {
 
@@ -71,7 +70,6 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N = p*q, where p and q are primes
      */
-    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisDistinctSemiprime() {
 
@@ -97,7 +95,6 @@ public class ClassicalImplTest {
     /**
      * Tests the prime factorization of N=p*q*r, where p, q, and r are primes
      */
-    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisCompositeDistinct() {
 
@@ -119,9 +116,8 @@ public class ClassicalImplTest {
     }
 
     /**
-     * Tests the prime factorizatino of N=p*p*p, where p is a prime
+     * Tests the prime factorization of N=p*p*p, where p is a prime
      */
-    @Ignore("Method not yet implemented")
     @Test
     public void shorsClassicalNisCompositeSame() {
 
@@ -137,6 +133,24 @@ public class ClassicalImplTest {
             assertEquals("Expected factor of 7", 7, factors.get(0).intValue());
             assertEquals("Expected factor of 7", 7, factors.get(1).intValue());
             assertEquals("Expected factor of 7", 7, factors.get(2).intValue());
+
+        }
+
+    }
+
+    /**
+     * Tests a trivial prime (N=1)
+     */
+    @Test
+    public void shorsClassicalNTrivial() {
+
+        for(int i = 0; i < 10; i++) {
+
+            List<Integer> factors = ClassicalImpl.shorsPrimeFactorization(1, false);
+
+            assertEquals("Expected one factor", 1, factors.size());
+
+            assertEquals("Expected factor of 1", 1, factors.get(0).intValue());
 
         }
 

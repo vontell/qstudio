@@ -24,17 +24,19 @@ public class ClassicalImpl {
      * finding subroutine). Algorithm and notes can be found at
      * https://en.wikipedia.org/wiki/Shor's_algorithm or at
      * https://github.com/vontell/Quantum-Computing-Collection
-     * NOTE: This function is currently limited to very small N (< 1000)
-     * TODO: This is not finished and should not be used
      * @param N The integer N = pq to find the prime factors of
      * @param verbose Prints out steps and calculations if set to True
      * @return A length 2 array which is [p, q], high precision
      */
     public static List<Integer> shorsPrimeFactorization(int N, boolean verbose) {
 
-        // Initial check for bad N
-        if(N == 0) {
+        // Initial check for bad or obvious N
+        if (N == 0) {
             throw new InvalidParameterException("N = 0 has no prime factorization");
+        } else if (N == 1 || N == 2 || N == 3) {
+            List<Integer> factors = new ArrayList<Integer>();
+            factors.add(N);
+            return factors;
         }
 
         // A loop which goes through a queue of numbers until all are primes
@@ -47,10 +49,22 @@ public class ClassicalImpl {
 
             // Done if at end of list
             if(index == factors.size()) {
+
+                if (verbose) {
+                    System.out.println("Went through all factors, exiting");
+                }
+
                 break;
             }
 
+            // If prime, move to the next factor in the list
+            // TODO: Use an efficient primality test
             if (Mathematics.isPrime(factors.get(index))) {
+
+                if (verbose) {
+                    System.out.println("" + factors.get(index) + " is a prime, move to next value");
+                }
+
                 index++;
                 continue;
             }
@@ -58,7 +72,7 @@ public class ClassicalImpl {
             N = factors.remove(index);
 
             // Pick a random number X < N
-            int X = new Random().nextInt(N - 2) + 1; //TODO: This may be messed up because X can be negative
+            int X = new Random().nextInt(N - 2) + 1;
 
             if(verbose) {
                 System.out.println("Found an X: " + X);
@@ -69,28 +83,15 @@ public class ClassicalImpl {
 
             if(gcd != 1) {
 
-                ArrayList<Integer> result;
-                if(gcd == N) {
-                    result = new ArrayList<Integer>();
-                    result.add(gcd);
-                } else {
-                    result = new ArrayList<Integer>();
-                    result.add(gcd);
-                    result.add(N / gcd);
+                factors.add(gcd);
+                factors.add(N / gcd);
+
+                if (verbose) {
+                    System.out.println("Good guess on GCD: " + gcd);
                 }
 
-                if(verbose) {
-
-                    if(result.size() == 1) {
-                        System.out.println("Good guess on X. Factor is " + gcd);
-                    } else {
-                        System.out.println("Good guess on X. Factors are " + gcd + " and " + (N / gcd));
-                    }
-
-                }
-
-                // Found a nontrivial factor! Lucky you!
-                return result;
+                // Good guess on X! Lucky you!
+                continue;
 
             }
 
@@ -114,10 +115,10 @@ public class ClassicalImpl {
             }
 
             Apint p = Mathematics.greatestCommonDenominator(a, bigN);
-            Apint q = Mathematics.greatestCommonDenominator(b, bigN);
+            //Apint q = Mathematics.greatestCommonDenominator(b, bigN);
 
             factors.add(p.intValue());
-            factors.add(q.intValue());
+            factors.add(bigN.divide(p).intValue());
 
             if(verbose) {
                 System.out.println("Found new factors, new collection: " + factors);
