@@ -15,7 +15,7 @@
       </md-toolbar-filler>
 
       <div>
-        <h2 class="md-toolbar-tools">Untitled document</h2>
+        <h2 class="md-toolbar-tools">Circuit Editor</h2>
         <md-menu-bar>
           <md-menu>
             <button ng-click="$mdOpenMenu()">
@@ -23,20 +23,11 @@
             </button>
             <md-menu-content>
               <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('share', $event)">
-                  Share...
-                </md-button>
-              </md-menu-item>
-              <md-menu-divider></md-menu-divider>
-              <md-menu-item>
                 <md-menu>
                   <md-button ng-click="$mdOpenMenu()">New</md-button>
                   <md-menu-content>
-                    <md-menu-item><md-button ng-click="ctrl.sampleAction('New Document', $event)">Document</md-button></md-menu-item>
-                    <md-menu-item><md-button ng-click="ctrl.sampleAction('New Spreadsheet', $event)">Spreadsheet</md-button></md-menu-item>
-                    <md-menu-item><md-button ng-click="ctrl.sampleAction('New Presentation', $event)">Presentation</md-button></md-menu-item>
-                    <md-menu-item><md-button ng-click="ctrl.sampleAction('New Form', $event)">Form</md-button></md-menu-item>
-                    <md-menu-item><md-button ng-click="ctrl.sampleAction('New Drawing', $event)">Drawing</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="ctrl.sampleAction('Blank Circuit', $event)">Blank Circuit</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="ctrl.sampleAction('From Template', $event)">From Template</md-button></md-menu-item>
                   </md-menu-content>
                 </md-menu>
               </md-menu-item>
@@ -52,6 +43,20 @@
                 </md-button>
               </md-menu-item>
               <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-menu>
+                  <md-button ng-click="$mdOpenMenu()">Export</md-button>
+                  <md-menu-content>
+                    <md-menu-item><md-button ng-click="ctrl.sampleAction('Blank Circuit', $event)">to .qstudio</md-button></md-menu-item>
+                    <md-menu-item><md-button ng-click="ctrl.sampleAction('From Template', $event)">to .qasm</md-button></md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="ctrl.sampleAction('share', $event)">
+                  Share...
+                </md-button>
+              </md-menu-item>
               <md-menu-item>
                 <md-button ng-click="ctrl.sampleAction('Print', $event)">
                   Print
@@ -133,51 +138,6 @@
               <md-menu-divider></md-menu-divider>
               <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
               <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
-            </md-menu-content>
-          </md-menu>
-          <md-menu>
-            <button ng-click="$mdOpenMenu()">
-              Format
-            </button>
-            <md-menu-content>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('bold', $event)">
-                  Bold
-                  <span class="md-alt-text"> {{ 'M-B' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('italic', $event)">
-                  Italic
-                  <span class="md-alt-text">{{ 'M-I' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('underline', $event)">
-                  Underline
-                  <span class="md-alt-text">{{ 'M-U' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('strikethrough', $event)">
-                  Strikethrough
-                  <span class="md-alt-text">{{ 'A-S-5' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('superscript', $event)">
-                  Superscript
-                  <span class="md-alt-text">{{ 'M-.' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ctrl.sampleAction('subscript', $event)">
-                  Subscript
-                  <span class="md-alt-text">{{ 'M-,' | keyboardShortcut }}</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-divider></md-menu-divider>
-              <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item>
             </md-menu-content>
           </md-menu>
         </md-menu-bar>
