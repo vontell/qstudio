@@ -202,45 +202,47 @@
 
       <!-- PANE FOR CIRCUIT -->
       <md-content id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-style="settings.circuitStyle" ng-show="settings.circuitMode" ng-controller="CircuitController">
+          
+        <div ng-repeat="wire in circuit.data.wires" ng-class="{wire: wire.type == 0, truncation: wire.type == 1}"></div>
         
-        <div class="gate hadamard draggable" ng-hide="true">
+        <div class="gate hadamard draggable" ng-hide="false">
           H
         </div>
           
         <!-- NEW WIRE FAB -->
         <md-fab-speed-dial md-direction="right" md-open="demo.isOpen"
-                         class="md-scale md-fab-top-left" ng-class="md-hover-full"
+                         class="md-scale md-fab" ng-class="md-hover-full"
                          ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
-        <md-fab-trigger>
-          <md-button aria-label="Add Line" class="md-fab md-primary">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">Add New Line</md-tooltip>
-            <md-icon md-svg-src="img/icons/ic_add.svg" aria-label="Add Line"></md-icon>
-          </md-button>
-        </md-fab-trigger>
+          <md-fab-trigger>
+            <md-button aria-label="Add Line" class="md-fab md-primary">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible">Add New Line</md-tooltip>
+              <md-icon md-svg-src="img/icons/ic_add.svg" aria-label="Add Line"></md-icon>
+            </md-button>
+          </md-fab-trigger>
 
-        <md-fab-actions>
-          <div>
-            <md-button aria-label="New Wire" class="md-fab md-raised md-mini"
-                       ng-click="">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible"
-                          md-autohide="false">
-                New Wire
-              </md-tooltip>
-              <md-icon md-svg-src="img/icons/ic_wire.svg" aria-label="New Wire"></md-icon>
-            </md-button>
-          </div>
-          <div>
-            <md-button aria-label="New Truncation" class="md-fab md-raised md-mini"
-                       ng-click="">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible"
-                          md-autohide="false">
-                New Truncation
-              </md-tooltip>
-              <md-icon md-svg-src="img/icons/ic_truncate.svg" aria-label="New Truncation"></md-icon>
-            </md-button>
-          </div>
-        </md-fab-actions>
-      </md-fab-speed-dial>
+          <md-fab-actions>
+            <div>
+              <md-button aria-label="New Wire" class="md-fab md-raised md-mini"
+                         ng-click="addWire(0, -1)">
+                <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                            md-autohide="false">
+                  New Wire
+                </md-tooltip>
+                <md-icon md-svg-src="img/icons/ic_wire.svg" aria-label="New Wire"></md-icon>
+              </md-button>
+            </div>
+            <div>
+              <md-button aria-label="New Truncation" class="md-fab md-raised md-mini"
+                         ng-click="addWire(1, -1)">
+                <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                            md-autohide="false">
+                  New Truncation
+                </md-tooltip>
+                <md-icon md-svg-src="img/icons/ic_truncate.svg" aria-label="New Tgit statruncation"></md-icon>
+              </md-button>
+            </div>
+          </md-fab-actions>
+        </md-fab-speed-dial>
         <!-- /NEW WIRE FAB -->
         
       </md-content>
@@ -325,6 +327,7 @@
   
   <!-- Your application bootstrap  -->
   <script src="js/color.js"></script>
+  <script src="js/domain.js"></script>
   <script src="js/ide.js"></script>
   
 </body>

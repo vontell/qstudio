@@ -13,6 +13,14 @@ interact('.draggable')
     },
     // enable autoScroll
     autoScroll: true,
+    
+    snap: {
+      targets: [
+        interact.createSnapGrid({ x: 150, y: 100 })
+      ],
+      range: Infinity,
+      relativePoints: [ {x: 0, y: 40} ]
+    },
 
     // call this function on every dragmove event
     onmove: dragMoveListener,

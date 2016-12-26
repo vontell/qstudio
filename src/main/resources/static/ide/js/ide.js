@@ -16,9 +16,9 @@ app.controller('MainController', function MainController($scope, $rootScope) {
             'font-size': "18px"                         // Default 18px font size
         },
         circuitStyle: {                                 // ngStyle for the circuit editor
-            background: "#ECEFF1"
+            background: "#f3f5fa"
         }
-    }
+    };
     
 });
 
@@ -97,12 +97,28 @@ app.controller('EditorTabController', function EditorTabController($scope, $root
 app.controller('CircuitController', function CircuitController($scope, $rootScope) {
   
     $scope.newWireFabOpen = false;
+    $scope.circuit = null; //TODO: This will be replaced by a robust file management system
   
     // Method which clears / instantiates elements on the board for a blank project
     $scope.createBoard = function() {
         
-        var boardContainer = null;
+        $scope.circuit = new Circuit();
         
     };
+  
+    // Adds a new wire of type 'type' to the circuit at the given index
+    // If index -1 is given, place it at the bottom of the circuit. Otherwise,
+    // place it at index
+    $scope.addWire = function(type, index) {
+      
+        if(index == -1) {
+            index = $scope.circuit.getCircuitHeight();
+        }
+        
+        $scope.circuit.addLine(type, index);
+      
+    };
+    
+    $scope.createBoard();
   
 });

@@ -1,4 +1,26 @@
-/* CSS for gates and components within the circuit editor */
+/* CSS for gates, wires, and components within the circuit editor */
+
+.line {
+    
+}
+
+.wire {
+    margin-top: 99px;
+    margin-bottom: 99px;
+    height: 2px;
+    width: 100%;
+    background: black;
+    margin-left: 64px;
+}
+
+.truncation {
+    margin-top: 99px;
+    margin-bottom: 99px;
+    height: 2px;
+    width: 100%;
+    background: red;
+    margin-left: 64px;
+}
 
 .gate {
     background: white;
@@ -10,6 +32,7 @@
     border: solid black 1px;
     padding: 18px;
     width: 64px;
+    position: absolute;
 }
 
 .hadamard {

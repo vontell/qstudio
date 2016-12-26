@@ -2,7 +2,7 @@
 
 #ide-directory {
     width: 256px;
-    background: red;
+    background: #464646;
 }
 
 .room-for-tabs {
@@ -16,4 +16,8 @@
 
 .logo-button {
   width: 52px;
+}
+
+#circuit-editor {
+    padding-top: 32px;
 }
