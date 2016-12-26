@@ -16,7 +16,7 @@ app.controller('MainController', function MainController($scope, $rootScope) {
             'font-size': "18px"                         // Default 18px font size
         },
         circuitStyle: {                                 // ngStyle for the circuit editor
-            background: "#CFD8DC"
+            background: "#ECEFF1"
         }
     }
     
@@ -90,5 +90,19 @@ app.controller('EditorTabController', function EditorTabController($scope, $root
     $scope.gotoCircuit = function(isCircuitView) {
         $rootScope.settings.circuitMode = isCircuitView;
     }
+  
+});
+
+/* Main controller for the circuit layout editor */
+app.controller('CircuitController', function CircuitController($scope, $rootScope) {
+  
+    $scope.newWireFabOpen = false;
+  
+    // Method which clears / instantiates elements on the board for a blank project
+    $scope.createBoard = function() {
+        
+        var boardContainer = null;
+        
+    };
   
 });

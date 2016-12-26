@@ -149,6 +149,41 @@
               <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
             </md-menu-content>
           </md-menu>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Run
+            </button>
+            <md-menu-content>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Tools
+            </button>
+            <md-menu-content>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Analyze
+            </button>
+            <md-menu-content>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              VCS
+            </button>
+            <md-menu-content>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Help
+            </button>
+            <md-menu-content>
+            </md-menu-content>
+          </md-menu>
         </md-menu-bar>
       </div>
     </div>
@@ -159,21 +194,56 @@
   <div class="page-container room-for-tabs" layout="row">
     
     <!-- PANE FOR GATES / COMPONENTS -->
-    <div id="ide-gates" layout-fill>
+    <div id="ide-directory" layout-fill>
     </div>
     <!-- / GATE PANE -->
     
     <div id="editor-pane" layout="column" layout-fill>
 
       <!-- PANE FOR CIRCUIT -->
-      <div id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-style="settings.circuitStyle" ng-show="settings.circuitMode">
-        IN CIRCUIT MODE
+      <md-content id="circuit-editor" class="ide-container dropzone room-for-tabs" ng-style="settings.circuitStyle" ng-show="settings.circuitMode" ng-controller="CircuitController">
         
-        <div class="gate hadamard draggable">
+        <div class="gate hadamard draggable" ng-hide="true">
           H
         </div>
+          
+        <!-- NEW WIRE FAB -->
+        <md-fab-speed-dial md-direction="right" md-open="demo.isOpen"
+                         class="md-scale md-fab-top-left" ng-class="md-hover-full"
+                         ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+        <md-fab-trigger>
+          <md-button aria-label="Add Line" class="md-fab md-primary">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">Add New Line</md-tooltip>
+            <md-icon md-svg-src="img/icons/ic_add.svg" aria-label="Add Line"></md-icon>
+          </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+          <div>
+            <md-button aria-label="New Wire" class="md-fab md-raised md-mini"
+                       ng-click="">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                          md-autohide="false">
+                New Wire
+              </md-tooltip>
+              <md-icon md-svg-src="img/icons/ic_wire.svg" aria-label="New Wire"></md-icon>
+            </md-button>
+          </div>
+          <div>
+            <md-button aria-label="New Truncation" class="md-fab md-raised md-mini"
+                       ng-click="">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible"
+                          md-autohide="false">
+                New Truncation
+              </md-tooltip>
+              <md-icon md-svg-src="img/icons/ic_truncate.svg" aria-label="New Truncation"></md-icon>
+            </md-button>
+          </div>
+        </md-fab-actions>
+      </md-fab-speed-dial>
+        <!-- /NEW WIRE FAB -->
         
-      </div>
+      </md-content>
       <!-- / CIRCUIT PANE -->
         
       <!-- PANE FOR CODE EDITOR -->
