@@ -1,14 +1,70 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
+/* Custum styling for QStudio.io */
 
-.icon-block {
-  padding: 0 15px;
+#top-banner {
+    height: 500px;
+    text-align: center;
+    background: url(../img/background.jpg) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-.icon-block .material-icons {
-	font-size: inherit;
+
+#main-heading {
+    color: white;
+    padding-top: 128px;
+    font-weight: 500;
+}
+
+#main-subheading {
+    color: white;
+    margin: auto auto;
+    max-width: 756px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: -32px;
+}
+
+.feature-img {
+    width: 100%;
+    display: inline-block;
+}
+
+.feature-card {
+    margin: 16px;
+    height: 456px;
+}
+
+.card-img-container {
+    height: 256px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#learn-card {
+    background: url(../img/learning.jpg) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#ide-card {
+    background: url(../img/shorcode.png) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#apply-card {
+    background: url(../img/dilutionfridge.jpg) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.center-text {
+    text-align: center;
 }

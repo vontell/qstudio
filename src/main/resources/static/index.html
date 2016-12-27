@@ -1,111 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Qstudio</title>
-
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QStudio</title>
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-        <li><a href="ide/">Circuit IDE</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-        <li><a href="ide/">Circuit IDE</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <h1 class="header center orange-text">QSTUDIO</h1>
-      <div class="row center">
-        <h5 class="header col s12 light">The best quantum computing tools, guides, and IDE on the internet.</h5>
-      </div>
-      <br><br>
-
-    </div>
+<body ng-app="HomeApp" ng-controller="MainController" ng-cloak>
+    
+  <div id="top-banner">
+    <h1 id="main-heading" class="md-display-4">QStudio</h1>
+    <p id="main-subheading" class="md-headline">A complete architecture for quantum computing in the cloud, including API, control architecture, IDE, and learning materials</p>
   </div>
-
-
-  <div class="container">
-    <div class="section">
-
-        <!-- Main points section -->
-        <div class="row">
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/sample-1.jpg">
-              <span class="card-title">Learn</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-          </div>
-        </div>
-        </div>
-
-    </div>
-    <br><br>
-
-    <div class="section">
-
-    </div>
+  
+  <div id="features" layout-gt-sm="row" layout-padding layout="column">
+    <md-card class="feature-card" flex-gt-sm="33">
+      <div id="learn-card" class="card-img-container">
+      </div>
+      <md-card-title>
+        <md-card-title-text class="center-text">
+          <span class="md-headline">Lessons and Guides</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+          Learn everything you need to know to become an effective quantum programmer, with our tutorials, guides, and lessons plans, complete with examples and exercise problems.
+        </p>
+      </md-card-content>
+      <md-card-actions layout="column" layout-align="start">
+        <md-button>START LEARNING</md-button>
+      </md-card-actions>
+    </md-card>
+    <md-card class="feature-card" flex-gt-sm="33">
+      <div id="ide-card" class="card-img-container">
+      </div>
+      <md-card-title>
+        <md-card-title-text class="center-text">
+          <span class="md-headline">Full IDE</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+          The QStudio IDE is a full-featured integrated development environment, complete with a graphical circuit interface, code editor, project manager, and testing tools.
+        </p>
+      </md-card-content>
+      <md-card-actions layout="column" layout-align="start">
+        <md-button ng-href="/ide/index.html">START BUILDING</md-button>
+      </md-card-actions>
+    </md-card>
+    <md-card class="feature-card" flex-gt-sm="33">
+      <div id="apply-card" class="card-img-container">
+      </div>
+      <md-card-title>
+        <md-card-title-text class="center-text">
+          <span class="md-headline">Real Device Experimenting</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+          Begin testing and applying your quantum code on real devices, using our cloud quantum computing API and learning about our various quantum computing infrastructures.
+        </p>
+      </md-card-content>
+      <md-card-actions layout="column" layout-align="start">
+        <md-button>START APPLYING</md-button>
+      </md-card-actions>
+    </md-card>
   </div>
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
 
-  <footer class="page-footer orange">
-    <div class="container">
-      <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
-    </div>
-  </footer>
-
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-
-  </body>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  
+  <!-- Your application bootstrap  -->
+  <script src="js/home.js"></script>
+  
+</body>
 </html>
