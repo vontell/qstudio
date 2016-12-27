@@ -68,3 +68,9 @@
 .center-text {
     text-align: center;
 }
+
+footer {
+    background: #464646;
+    color: white;
+    height: 60px;
+}

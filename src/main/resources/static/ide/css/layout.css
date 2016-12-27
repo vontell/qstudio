@@ -21,3 +21,16 @@
 #circuit-editor {
     padding-top: 32px;
 }
+
+.open-container {
+    display: inline-block;
+    border-radius: 8px;
+    width: 200px;
+    height: 200px;
+    margin: 8px;
+    text-align: center;
+}
+
+.open-icon {
+    
+}
