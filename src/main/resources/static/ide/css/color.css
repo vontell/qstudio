@@ -25,8 +25,8 @@
     cursor: pointer;
 }
 
-/*#cloud-storage-icon {
-    background: url(../img/icons/mark-github.svg) no-repeat center center; 
+#cloud-storage-icon {
+    background: url(../img/icons/ic_cloud.svg) no-repeat center center; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -39,12 +39,15 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    width: 40% !important;
+    height: 40% !important;
+    margin-top: 22px;
 }
 
 #computer-icon {
-    background: url(../img/icons/mark-github.svg) no-repeat center center; 
+    background: url(../img/icons/ic_computer.svg) no-repeat center center; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}*/
+}
