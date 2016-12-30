@@ -1,0 +1,48 @@
+/* Custom styling for QStudio.io Learning Page */
+
+#top-banner {
+    height: 300px;
+    text-align: center;
+    background: url(../img/background.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#main-heading {
+    color: white;
+    padding-top: 128px;
+    font-weight: 500;
+}
+
+#main-subheading {
+    color: white;
+    margin: auto auto;
+    max-width: 756px;
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-top: -32px;
+}
+
+#lesson-list {
+    width: 75%;
+    max-width: 768px;
+    margin: auto auto;
+}
+
+.lesson-num {
+    color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+footer {
+    background: #464646;
+    color: white;
+    height: 60px;
+}
