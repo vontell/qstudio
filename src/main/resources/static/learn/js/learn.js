@@ -1,4 +1,4 @@
-var app = angular.module('LearnApp', ['ngMaterial']);
+var app = angular.module('LearnApp', ['ngMaterial', 'ngRoute']);
 
 /* Main controller */
 app.controller('MainController', function MainController($scope, $rootScope) {
@@ -22,8 +22,20 @@ app.controller('MainController', function MainController($scope, $rootScope) {
     
     // Function which shows the lesson at index in $scope.lessons once a lesson is clicked
     $scope.showLesson = function(index) {
-        
+        $scope.lesson = "lessons/" + $scope.lessons[index].link;
+        $scope.showingHome = false;
     };
     
+    $scope.showingHome = false;
+    
+    // Shows the home page of the lessons section
+    $scope.showHome = function() {
+        $scope.lesson = "base.html"
+        $scope.showingHome = true;
+    }
+    
+    $scope.showHome();
     
 });
+
+/* Configuration for lesson routing */
