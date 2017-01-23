@@ -116,6 +116,7 @@ app.controller('CircuitController', function CircuitController($scope, $rootScop
         }
         
         $scope.circuit.addLine(type, index);
+        console.log($scope.circuit.data);
       
     };
     

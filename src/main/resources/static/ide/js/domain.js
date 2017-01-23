@@ -12,8 +12,9 @@ function Circuit(filename) {
 
     this.data = {
         wires: [],
-        data: []
+        gates: []
     };
+  
     
     /**
      * Attaches data to this circuit (i.e. the actual circuit data)
@@ -28,6 +29,7 @@ function Circuit(filename) {
         this.data = data;
 
     };
+  
 
     /**
      * Returns the filename for this cicruit
@@ -35,6 +37,7 @@ function Circuit(filename) {
     this.getFilename = function() {
         return this.filename;
     };
+  
 
     /**
      * Returns the size of this circuit in number of wires
@@ -59,9 +62,32 @@ function Circuit(filename) {
         // Attach the new wire to the datatype
         this.data.wires.splice(index, 0, {
             type: wireType,
-            qubit: null
+            qubit: InitQubit.ZERO
         });
 
     };
+  
+  
+    /*
+     * Edits the initial qubit on the wire at index to be of the newType
+     */
+    this.editInitQubit = function(index, newType) {
+        this.data.wires[index].qubit = newType;
+    };
 
-}
+};
+
+
+/**
+ * A type for qubits which can currently be one of the following:
+ *    "0", "1", "+", "-" (i.e, it can be in either the logical or Hadamard 
+ *    basis)
+ */
+var InitQubit = {
+  ZERO: 0,
+  ONE: 1,
+  PLUS: 2,
+  MINUS: 3,
+  NULL: 4,
+  repr: ["0", "1", "+", "-", ""]
+};
